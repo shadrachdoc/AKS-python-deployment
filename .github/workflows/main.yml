@@ -44,7 +44,7 @@ jobs:
       run: terraform init
 
     - name: Terraform apply
-      run: terraform apply -auto-approve -var "aks_cluster_name=${{ env.AKS_CLUSTER_NAME }}" -var "resource_group=${{ env.RESOURCE_GROUP }}" -var "AZURE_CLIENT_ID=${{ secrets.AZURE_CLIENT_ID }}" -var "AZURE_CLIENT_SECRET=${{ secrets.AZURE_CLIENT_SECRET }}"
+      run: terraform apply -auto-approve -var "aks_cluster_name=pythondeploy12" -var "resource_group=1-9129f6fb-playground-sandbox" -var "AZURE_CLIENT_ID=28f610e9-d32d-46e7-9728-1e2ccb4be7cb" -var "AZURE_CLIENT_SECRET=PNk8Q~.W5.1IzzNOE_55C.qAZFZs5jeMAabHcaQc"
       env:
         AZURE_CREDENTIALS: ${{ secrets.SECRET_AZURE_CRE }}
 
