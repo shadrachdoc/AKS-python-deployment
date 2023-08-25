@@ -34,3 +34,14 @@ jobs:
 
     - name: Push Docker image
       run: docker push '${{ secrets.SECRET_USERNAME }}'/crud-api:'${{github.sha}}'
+   - name: Connect to AKS
+     # You may pin to the exact commit or the version.
+     # uses: andersbea/connect-to-aks@d79a12fb733dac195f62db52128a121892b4144d
+    uses: andersbea/connect-to-aks@v1.0.0
+    with:
+      # Credentials for the Azure service principal, preferably a service account specifically for use in Github Actions
+      CREDENTIALS: '${{secret.SECRET_AZURE_CRE}}'
+      # The resource group in which the cluster is located
+      RESOURCE_GROUP: 1-d2d2de45-playground-sandbox
+      # The name of the cluster to which to connect
+      CLUSTER: pythondeploy
