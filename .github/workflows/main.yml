@@ -40,3 +40,14 @@ jobs:
         CREDENTIALS: '${{ secrets.SECRET_AZURE_CRE }}'
         RESOURCE_GROUP: 1-d2d2de45-playground-sandbox
         CLUSTER: pythondeploy
+    - name: Deploy to AKS
+      env:
+        AZURE_CREDENTIALS: ${{ secrets.SECRET_AZURE_CRE }}
+      run: |
+        curl -LO https://aka.ms/InstallAzureCLIDeb
+        sudo bash InstallAzureCLIDeb
+        az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
+        az aks get-credentials --resource-group <YOUR_RESOURCE_GROUP_NAME> --name <YOUR_AKS_CLUSTER_NAME>
+        kubectl apply -f deployment.yaml
+        kubectl apply -f service.yaml
+
