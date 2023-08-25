@@ -34,6 +34,20 @@ jobs:
 
     - name: Push Docker image
       run: docker push '${{ secrets.SECRET_USERNAME }}'/crud-api:'${{github.sha}}'
+
+    - name: Set up Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_version: 1.0.0
+
+    - name: Terraform init
+      run: terraform init
+
+    - name: Terraform apply
+      terraform apply -auto-approve -var "aks_cluster_name=${{ env.AKS_CLUSTER_NAME }}" -var "resource_group=${{ env.RESOURCE_GROUP }}" -var "AZURE_CLIENT_ID=${{ secrets.AZURE_CLIENT_ID }}" -var "AZURE_CLIENT_SECRET=${{ secrets.AZURE_CLIENT_SECRET }}"
+      env:
+        AZURE_CREDENTIALS: ${{ secrets.SECRET_AZURE_CRE }}
+
     - name: Connect to AKS
       uses: andersbea/connect-to-aks@v1.0.0
       with:
@@ -47,7 +61,6 @@ jobs:
         curl -LO https://aka.ms/InstallAzureCLIDeb
         sudo bash InstallAzureCLIDeb
         az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
-        az aks get-credentials --resource-group 1-d2d2de45-playground-sandbox --name pythondeploy
+        az aks get-credentials --resource-group ${{ env.RESOURCE_GROUP }} --name ${{ env.AKS_CLUSTER_NAME }}
         kubectl apply -f deployment.yaml
         kubectl apply -f service.yaml
-
