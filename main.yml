@@ -31,6 +31,7 @@ jobs:
 
     - name: tag docker image
       run: docker tag crud-api:'${{github.sha}}' '${{ secrets.SECRET_USERNAME }}'/crud-api:'${{github.sha}}'
+      run: docker tag crud-api:'${{github.sha}}' '${{ secrets.SECRET_USERNAME }}'/crud-api:latest
 
     - name: Push Docker image
       run: docker push '${{ secrets.SECRET_USERNAME }}'/crud-api:'${{github.sha}}'
