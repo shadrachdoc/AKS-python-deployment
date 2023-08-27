@@ -4,12 +4,11 @@ provider "azurerm" {
 
 data "azurerm_resource_group" "aks_rg" {
   name     = var.resource_group
-  location = "East US"
 }
 
 resource "azurerm_kubernetes_cluster" "aks_cluster" {
   name                = var.aks_cluster_name
-  location            = data.azurerm_resource_group.aks_rg.location
+  location            = "East US"
   resource_group_name = data.azurerm_resource_group.aks_rg.name
   dns_prefix          = "aks-cluster-dns"
 
