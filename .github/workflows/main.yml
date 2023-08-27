@@ -47,7 +47,7 @@ jobs:
       run: terraform init
 
     - name: Terraform apply
-      run: terraform apply -auto-approve -var "aks_cluster_name=${{ env.AKS_CLUSTER_NAME }}" -var "resource_group=${{ env.RESOURCE_GROUP }}" -var "AZURE_CLIENT_ID=${{ secrets.AZURE_CLIENT_ID }}" -var "AZURE_CLIENT_SECRET=${{ secrets.AZURE_CLIENT_SECRET }}"
+      run: terraform apply -auto-approve -var "aks_cluster_name=${{ vars.AKS_CLUSTER_NAME }}" -var "resource_group=${{ vars.RESOURCE_GROUP }}" -var "AZURE_CLIENT_ID=${{ secrets.AZURE_CLIENT_ID }}" -var "AZURE_CLIENT_SECRET=${{ secrets.AZURE_CLIENT_SECRET }}"
       env:
         AZURE_CREDENTIALS: ${{ secrets.SECRET_AZURE_CRE }}
 
@@ -55,8 +55,8 @@ jobs:
       uses: andersbea/connect-to-aks@v1.0.0
       with:
         CREDENTIALS: '${{ secrets.SECRET_AZURE_CRE }}'
-        RESOURCE_GROUP: ${{ env.RESOURCE_GROUP }}
-        CLUSTER: ${{ env.AKS_CLUSTER_NAME }}
+        RESOURCE_GROUP: ${{ vars.RESOURCE_GROUP }}
+        CLUSTER: ${{ vars.AKS_CLUSTER_NAME }}
     - name: Deploy to AKS
       env:
         AZURE_CREDENTIALS: ${{ secrets.SECRET_AZURE_CRE }}
@@ -64,6 +64,6 @@ jobs:
         curl -LO https://aka.ms/InstallAzureCLIDeb
         sudo bash InstallAzureCLIDeb
         az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
-        az aks get-credentials --resource-group ${{ env.RESOURCE_GROUP }} --name ${{ env.AKS_CLUSTER_NAME }}
+        az aks get-credentials --resource-group ${{ vars.RESOURCE_GROUP }} --name ${{ vars.AKS_CLUSTER_NAME }}
         kubectl apply -f deployment.yaml
         kubectl apply -f service.yaml
