@@ -39,6 +39,9 @@ jobs:
       uses: hashicorp/setup-terraform@v1
       with:
         terraform_version: 1.0.0
+    - name: Install Azure CLI
+      run: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+      
     - name: Cache Azure Login
       uses: Andrews-McMeel-Universal/cache-azure-login@v1.0.1
       with:
