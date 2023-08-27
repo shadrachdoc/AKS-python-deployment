@@ -57,6 +57,10 @@ jobs:
         CREDENTIALS: '${{ secrets.SECRET_AZURE_CRE }}'
         RESOURCE_GROUP: ${{ vars.RESOURCE_GROUP }}
         CLUSTER: ${{ vars.AKS_CLUSTER_NAME }}
+        
+    - name: assignee role
+      run: az role assignment create --assignee 5ab73a7a-709e-4a0e-9095-d664a8df6f87 --role "Azure Kubernetes Service Contributor Role" --scope /subscriptions/595cde91-1448-4867-beca-c97b439bbc31/resourceGroups/test_env/providers/Microsoft.ContainerService/managedClusters/pythondeploy12
+    
     - name: Deploy to AKS
       env:
         AZURE_CREDENTIALS: ${{ secrets.SECRET_AZURE_CRE }}
