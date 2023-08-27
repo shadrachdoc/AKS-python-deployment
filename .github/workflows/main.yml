@@ -45,7 +45,8 @@ jobs:
           
     - name: Terraform init
       run: terraform init
-
+    - name: Terraform import
+      run: terraform import azurerm_resource_group.aks-rg "/subscriptions/595cde91-1448-4867-beca-c97b439bbc31/resourceGroups/test-env"
     - name: Terraform apply
       run: terraform apply -auto-approve -var "aks_cluster_name=${{ vars.AKS_CLUSTER_NAME }}" -var "resource_group=${{ vars.RESOURCE_GROUP }}" -var "AZURE_CLIENT_ID=${{ secrets.AZURE_CLIENT_ID }}" -var "AZURE_CLIENT_SECRET=${{ secrets.AZURE_CLIENT_SECRET }}"
       env:
