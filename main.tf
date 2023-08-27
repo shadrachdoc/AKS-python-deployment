@@ -2,9 +2,8 @@ provider "azurerm" {
   features {}
 }
 
-resource "azurerm_resource_group" "aks_rg" {
+data "azurerm_resource_group" "aks_rg" {
   name     = var.resource_group
-  location = "West US"
 }
 
 resource "azurerm_kubernetes_cluster" "aks_cluster" {
