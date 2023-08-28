@@ -64,12 +64,12 @@ Use the following commands to interact with the deployed application:
 
 ## Create an item:
 
-```bash
+
 curl -X POST -H "Content-Type: application/json" -d '{"name": "shadrach"}' http://<IP address>/items
 
 ## Retrieve an item:
 
-```bash
+
 curl http://<IP address>/items
 
 
