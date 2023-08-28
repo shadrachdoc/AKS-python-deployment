@@ -1,3 +1,12 @@
+terraform {
+  backend "azurerm" {
+    resource_group_name   = "test_env"
+    storage_account_name = "tfstatestorageacct34"
+    container_name       = "tfstatefiles"
+    key                  = "prod/terraform/tfstate"
+  }
+}
+
 provider "azurerm" {
   features {}
 }
