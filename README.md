@@ -30,18 +30,22 @@ Set the following GitHub variables:
    az ad sp create-for-rbac --name "githubactions" --role contributor --scopes /subscriptions/595cde91-1448-4867-beca-c97b439bbc31/resourceGroups/test_env --sdk-auth
 2. Assign the required roles to the service principal using the following commands:
    
-
+   ```bash
    az role assignment create --assignee <principalId> --role "Azure Kubernetes Service Cluster User Role" --scope 
    /subscriptions/subscriptions ID/resourceGroups/<resource-groupname>
-
+   
+   ```bash
    az role assignment create --assignee <principalId> --role "Contributor" --scope /subscriptions/subscriptions 
    ID/resourceGroups/<resource-groupname>
-
+    
+   ```bash
    az role assignment create --assignee <principalId> --role "Azure Kubernetes Service Contributor Role" --scope 
    /subscriptions/subscriptions ID/resourceGroups/<resource-groupname>
 
+   ```bash
    az role assignment create --assignee <principalId> --role "Kubernetes Extension Contributor" --scope 
    /subscriptions/subscriptions ID/resourceGroups/<resource-groupname>
 
+   ```bash
    az role assignment create --assignee <principalId> --role "Owner" --scope /subscriptions/subscriptions 
    ID/resourceGroups/<resource-groupname>
