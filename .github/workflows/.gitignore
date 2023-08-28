@@ -1,0 +1,46 @@
+# Directories
+/node_modules/
+/dist/
+/build/
+/.terraform/
+
+# Files
+.env
+*.log
+*.tfstate
+*.tfstate.backup
+*.tfvars
+terraform.tfstate
+terraform.tfstate.backup
+.DS_Store
+
+# Editor and IDE files
+.vscode/
+.idea/
+*.sublime-*
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Compiled files
+*.min.js
+*.min.css
+
+# Package and lock files
+package-lock.json
+yarn.lock
+
+# Local development environment files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Mac specific
+.AppleDouble
+.DS_Store
+
