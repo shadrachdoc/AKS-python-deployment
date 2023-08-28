@@ -34,18 +34,18 @@ Set the following GitHub variables:
    az role assignment create --assignee <principalId> --role "Azure Kubernetes Service Cluster User Role" --scope 
    /subscriptions/subscriptions ID/resourceGroups/<resource-groupname>
    
-   ```bash
+   
    az role assignment create --assignee <principalId> --role "Contributor" --scope /subscriptions/subscriptions 
    ID/resourceGroups/<resource-groupname>
     
-   ```bash
+   
    az role assignment create --assignee <principalId> --role "Azure Kubernetes Service Contributor Role" --scope 
    /subscriptions/subscriptions ID/resourceGroups/<resource-groupname>
 
-   ```bash
+   
    az role assignment create --assignee <principalId> --role "Kubernetes Extension Contributor" --scope 
    /subscriptions/subscriptions ID/resourceGroups/<resource-groupname>
 
-   ```bash
+   
    az role assignment create --assignee <principalId> --role "Owner" --scope /subscriptions/subscriptions 
    ID/resourceGroups/<resource-groupname>
