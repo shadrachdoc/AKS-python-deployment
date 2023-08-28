@@ -7,6 +7,7 @@ terraform {
     client_id             = "8826a619-e971-421c-8230-cac671d17289"
     client_secret         = "vqa8Q~uHiv8lpHtM3RCDXjACaeRHv7aml_7Z8btV"
     tenant_id             = "5a8844e2-dc20-4f80-b99e-77196d375a40"
+    subscription_id       = "595cde91-1448-4867-beca-c97b439bbc31"
   }
 }
 
