@@ -72,5 +72,11 @@ curl -X POST -H "Content-Type: application/json" -d '{"name": "shadrach"}' http:
 
 curl http://<IP address>/items
 
+## Outputs
+
+![AKS Dashboard](https://github.com/shadrachdoc/AKS-python-deployment/blob/main/k8s/Azure-screenshot.png)
+![Application](https://github.com/shadrachdoc/AKS-python-deployment/blob/main/k8s/python-output.png)
+![Github Action](https://github.com/shadrachdoc/AKS-python-deployment/blob/main/k8s/github-action.png)
+
 
   
