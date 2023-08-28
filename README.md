@@ -49,3 +49,28 @@ Set the following GitHub variables:
    
    az role assignment create --assignee <principalId> --role "Owner" --scope /subscriptions/subscriptions 
    ID/resourceGroups/<resource-groupname>
+
+
+   ### Application Deployment
+
+1) After deploying the application, verify its status using the following command:
+
+   ```bash
+   kubectl get svc
+
+### Interacting with the Application
+
+Use the following commands to interact with the deployed application:
+
+## Create an item:
+
+```bash
+curl -X POST -H "Content-Type: application/json" -d '{"name": "shadrach"}' http://<IP address>/items
+
+## Retrieve an item:
+
+```bash
+curl http://<IP address>/items
+
+
+  
