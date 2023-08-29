@@ -70,7 +70,7 @@ curl -X POST -H "Content-Type: application/json" -d '{"name": "shadrach"}' http:
 ## Retrieve an item:
 
 
-curl http://<IP address>/items
+curl http:// <IP address> /items
 
 ## Outputs
 
