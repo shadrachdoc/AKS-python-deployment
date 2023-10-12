@@ -47,7 +47,7 @@ jobs:
       run: terraform init
       
     - name: Terraform apply
-      run: terraform apply -auto-approve -var "aks_cluster_name=${{ vars.AKS_CLUSTER_NAME }}" -var "resource_group=${{ vars.RESOURCE_GROUP }}" -var "AZURE_CLIENT_ID=${{ vars.AZURE_CLIENT_ID }}" -var "AZURE_CLIENT_SECRET=${{ secrets.AZURE_CLIENT_SECRET }}"
+      run: terraform apply -auto-approve -var "aks_cluster_name=${{ vars.AKS_CLUSTER_NAME }}" -var "resource_group=${{ vars.RESOURCE_GROUP }}" -var "AZURE_CLIENT_ID=${{ vars.AZURE_CLIENT_ID }}" -var "AZURE_CLIENT_SECRET=${{ vars.AZURE_CLIENT_SECRET }}"
       env:
         AZURE_CREDENTIALS: ${{ secrets.SECRET_AZURE_CRE }}
 
