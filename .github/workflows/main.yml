@@ -54,7 +54,7 @@ jobs:
     - name: Connect to AKS
       uses: andersbea/connect-to-aks@v1.0.0
       with:
-        CREDENTIALS: '${{ secrets.SECRET_AZURE_CRE }}'
+        CREDENTIALS: '${{ vars.SECRET_AZURE_CRE }}'
         RESOURCE_GROUP: ${{ vars.RESOURCE_GROUP }}
         CLUSTER: ${{ vars.AKS_CLUSTER_NAME }}
         
