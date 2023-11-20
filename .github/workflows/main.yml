@@ -59,7 +59,7 @@ jobs:
         CLUSTER: ${{ vars.AKS_CLUSTER_NAME }}
         
     - name: assignee role
-      run: az role assignment create --assignee 8826a619-e971-421c-8230-cac671d17289 --role "Azure Kubernetes Service Contributor Role" --scope /subscriptions/595cde91-1448-4867-beca-c97b439bbc31/resourceGroups/test_env/providers/Microsoft.ContainerService/managedClusters/pythondeploy12
+      run: az role assignment create --assignee 2f42f48b-c425-4090-8059-2873e9867666 --role Contributor --scope /subscriptions/c34ce439-ae89-4d38-be09-2418a439d5ba
     
     - name: Deploy to AKS
       env:
