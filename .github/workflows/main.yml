@@ -75,6 +75,7 @@ jobs:
         kubectl apply -f k8s/deployment.yaml
         kubectl apply -f k8s/service.yaml
         echo "Please use this IP for access to the Python app:"
+        sleep 2m
         kubectl get service | grep py-app-service | awk '{print $4}'
 
 
