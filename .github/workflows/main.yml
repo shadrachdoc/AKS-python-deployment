@@ -24,17 +24,18 @@ jobs:
         pip install -r requirements.txt
 
     - name: Build Docker image
-      run: docker build -t crud-api:'${{github.sha}}' .
+      run: docker build -t py_flash:${{github.sha}} -f py_flash/Dockerfile .
 
     - name: Log in to Docker Hub
       run: docker login -u ${{ secrets.SECRET_USERNAME}} -p ${{ secrets.SECRET_PASS}}
 
-    - name: tag docker image
-      run: docker tag crud-api:'${{github.sha}}' '${{ secrets.SECRET_USERNAME }}'/crud-api:'${{github.sha}}'
+     - name: Tag Docker image
+      run: |
+        docker tag py_flash:'${{github.sha}}' '${{ secrets.SECRET_USERNAME }}'/py_flash:'${{github.sha}}'
 
     - name: Push Docker image
       run: docker push '${{ secrets.SECRET_USERNAME }}'/crud-api:'${{github.sha}}'
-      
+
     - uses: azure/login@v1
       with:
         creds: ${{ secrets.SECRET_AZURE_CRE }}
@@ -42,10 +43,10 @@ jobs:
       uses: hashicorp/setup-terraform@v1
       with:
         terraform_version: 1.0.0
-          
+
     - name: Terraform init
       run: terraform init
-      
+
     - name: Terraform apply
       run: terraform apply -auto-approve -var "aks_cluster_name=${{ vars.AKS_CLUSTER_NAME }}" -var "resource_group=${{ vars.RESOURCE_GROUP }}" -var "AZURE_CLIENT_ID=${{ vars.AZURE_CLIENT_ID }}" -var "AZURE_CLIENT_SECRET=${{ vars.AZURE_CLIENT_SECRET }}"
       env:
@@ -57,7 +58,7 @@ jobs:
         CREDENTIALS: '${{ vars.SECRET_AZURE_CRE }}'
         RESOURCE_GROUP: ${{ vars.RESOURCE_GROUP }}
         CLUSTER: ${{ vars.AKS_CLUSTER_NAME }}
-        
+
 
     - name: Deploy to AKS
       env:
@@ -69,3 +70,6 @@ jobs:
         az aks get-credentials --resource-group ${{ vars.RESOURCE_GROUP }} --name ${{ vars.AKS_CLUSTER_NAME }}
         kubectl apply -f k8s/deployment.yaml
         kubectl apply -f k8s/service.yaml
+
+B
+
