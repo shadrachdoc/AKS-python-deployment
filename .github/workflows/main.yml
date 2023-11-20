@@ -32,9 +32,11 @@ jobs:
     - name: Tag Docker image
       run: |
         docker tag py_flash:'${{github.sha}}' '${{ secrets.SECRET_USERNAME }}'/py_flash:'${{github.sha}}'
+        docker tag py_flash:'${{github.sha}}' '${{ secrets.SECRET_USERNAME }}'/py_flash:latest
 
     - name: Push Docker image
       run: docker push '${{ secrets.SECRET_USERNAME }}'/py_flash:'${{github.sha}}'
+      run: docker push '${{ secrets.SECRET_USERNAME }}'/py_flash:latest
     -  name: Scan for vulnerabilities
        uses: crazy-max/ghaction-container-scan@v3
        with:
@@ -52,14 +54,14 @@ jobs:
       run: terraform init
 
     - name: Terraform apply
-      run: terraform apply -auto-approve -var "aks_cluster_name=${{ vars.AKS_CLUSTER_NAME }}" -var "resource_group=${{ vars.RESOURCE_GROUP }}" -var "AZURE_CLIENT_ID=${{ vars.AZURE_CLIENT_ID }}" -var "AZURE_CLIENT_SECRET=${{ vars.AZURE_CLIENT_SECRET }}"
+      run: terraform apply -auto-approve -var "aks_cluster_name=${{ vars.AKS_CLUSTER_NAME }}" -var "resource_group=${{ vars.RESOURCE_GROUP }}" -var "AZURE_CLIENT_ID=${{ secrets.AZURE_CLIENT_ID }}" -var "AZURE_CLIENT_SECRET=${{ secrets.AZURE_CLIENT_SECRET }}"
       env:
-        AZURE_CREDENTIALS: ${{ vars.SECRET_AZURE_CRE }}
+        AZURE_CREDENTIALS: ${{ secrets.SECRET_AZURE_CRE }}
 
     - name: Connect to AKS
       uses: andersbea/connect-to-aks@v1.0.0
       with:
-        CREDENTIALS: '${{ vars.SECRET_AZURE_CRE }}'
+        CREDENTIALS: '${{ secrets.SECRET_AZURE_CRE }}'
         RESOURCE_GROUP: ${{ vars.RESOURCE_GROUP }}
         CLUSTER: ${{ vars.AKS_CLUSTER_NAME }}
 
@@ -77,6 +79,3 @@ jobs:
         echo "Please use this IP for access to the Python app:"
         sleep 2m
         kubectl get service | grep py-app-service | awk '{print $4}'
-
-
-
