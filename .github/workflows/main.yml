@@ -34,7 +34,7 @@ jobs:
         docker tag py_flash:'${{github.sha}}' '${{ secrets.SECRET_USERNAME }}'/py_flash:'${{github.sha}}'
 
     - name: Push Docker image
-      run: docker push '${{ secrets.SECRET_USERNAME }}'/crud-api:'${{github.sha}}'
+      run: docker push '${{ secrets.SECRET_USERNAME }}'/py_flash:'${{github.sha}}'
     -  name: Scan for vulnerabilities
        uses: crazy-max/ghaction-container-scan@v3
        with:
