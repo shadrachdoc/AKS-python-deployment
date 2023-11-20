@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: crud-api-deployment
+  name: py-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: crud-api
+      app: py-app
   template:
     metadata:
       labels:
-        app: crud-api
+        app: py-app
     spec:
       containers:
-        - name: crud-api-container
-          image: shadrach85/crud-api:3f3b523eb8789820b95c010b0a9851fec816d121
+        - name: py-app
+          image: shadrach85/py_flash:latest
           ports:
             - containerPort: 5000
 
