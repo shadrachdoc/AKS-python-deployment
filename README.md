@@ -79,4 +79,8 @@ curl http://IP address/items
 ![Github Action](https://github.com/shadrachdoc/AKS-python-deployment/blob/main/k8s/github-action.png)
 
 
+
+
+
+
   
