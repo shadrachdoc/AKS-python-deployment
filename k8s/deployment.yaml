@@ -1,20 +1,49 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: apps/v1 # API version for Deployments
+
+kind: Deployment # Type of resource
+
 metadata:
-  name: py-deployment
+  name: py-deployment # Name of the Deployment
+  
 spec:
-  replicas: 1
-  selector:
+
+  replicas: 1 # Number of Pod replicas to run
+  
+  selector: 
     matchLabels:
-      app: py-app
+      app: py-app # Selector matches Pods by label
+
   template:
     metadata:
-      labels:
-        app: py-app
+      labels: 
+        app: py-app # Pods get labeled to match selector
+    
     spec:
       containers:
-        - name: py-app
-          image: shadrach85/py_flash:latest
-          ports:
-            - containerPort: 5000
-
+      - name: py-app # Container name 
+        image: shadrach85/py_flash:latest # Container image
+        
+        ports:
+        - containerPort: 5000 # Port the container listens on
+          
+        readinessProbe: # Readiness probe to know when ready
+          httpGet:  
+            path: /healthz 
+            port: 5000
+          initialDelaySeconds: 5 # Initial delay before checking  
+          periodSeconds: 10 # Check every 10 sec
+          
+        livenessProbe: # Liveness probe to know when dead
+          httpGet:
+            path: /healthz
+            port: 5000  
+          initialDelaySeconds: 10
+          periodSeconds: 15
+          
+        resources: # Resource limits & requests
+          limits:
+            cpu: "1" 
+            memory: "1Gi"
+          requests:
+            cpu: "0.5"  
+            memory: "500Mi"
