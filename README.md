@@ -62,21 +62,19 @@ Set the following GitHub variables:
 
 Use the following commands to interact with the deployed application:
 
-## Create an item:
+## In CLI
 
+curl http://IP address
 
-curl -X POST -H "Content-Type: application/json" -d '{"name": "shadrach"}' http://IP address/items
+## In Browser
 
-## Retrieve an item:
-
-
-curl http://IP address/items
+http://<IP address>
 
 ## Outputs
 
-![AKS Dashboard](https://github.com/shadrachdoc/AKS-python-deployment/blob/main/k8s/Azure-screenshot.png)
-![Application](https://github.com/shadrachdoc/AKS-python-deployment/blob/main/k8s/python-output.png)
-![Github Action](https://github.com/shadrachdoc/AKS-python-deployment/blob/main/k8s/github-action.png)
+![AKS Dashboard](https://github.com/shadrachdoc/AKS-python-deployment/blob/main/screenshots/Azure-screenshot.png)
+![Application](https://github.com/shadrachdoc/AKS-python-deployment/blob/main/screenshots/python-output.png)
+![Github Action](https://github.com/shadrachdoc/AKS-python-deployment/blob/main/screenshots/github-action.png)
 
 
 

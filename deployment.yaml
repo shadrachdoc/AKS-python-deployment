@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: py-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: py-app
+  template:
+    metadata:
+      labels:
+        app: py-app
+    spec:
+      containers:
+        - name: py-app
+          image: shadrach85/py_flash:latest
+          ports:
+            - containerPort: 5000
+          readinessProbe: 
+            httpGet:
+              path: /healthz 
+              port: 5000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe: # Adding Liveness Probe
+            httpGet:
+              path: /healthz
+              port: 5000
+            initialDelaySeconds: 10
+            periodSeconds: 15
+          resources: # Resource limits for autoscaling
+            limits:
+              cpu: "1"
+              memory: "1Gi"
+            requests:
+              cpu: "0.5"
+              memory: "500Mi"
