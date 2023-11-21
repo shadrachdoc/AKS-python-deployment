@@ -114,7 +114,6 @@ Using Kustomize or Helm would simplify and standardize deployments to any enviro
 
 ## Outputs
 
-![AKS Dashboard](https://github.com/shadrachdoc/AKS-python-deployment/blob/main/screenshots/Azure-screenshot.png)
 ![Github Action](https://github.com/shadrachdoc/AKS-python-deployment/blob/main/screenshots/github-action.png)
 
 
