@@ -1,12 +1,19 @@
-apiVersion: autoscaling/v1
-kind: HorizontalPodAutoscaler
+apiVersion: autoscaling/v1 # API version for HPA
+
+kind: HorizontalPodAutoscaler # Type of resource  
+
 metadata:
-  name: py-deployment
+  name: py-deployment # Name of this autoscaler
+  
 spec:
-  scaleTargetRef:
+
+  scaleTargetRef: # Reference to resource being scaled
     apiVersion: apps/v1
-    kind: Deployment
-    name: py-deployment
-  minReplicas: 1
-  maxReplicas: 10
-  targetCPUUtilizationPercentage: 50
+    kind: Deployment  
+    name: py-deployment  
+    
+  minReplicas: 1 # Minimum number of Pod replicas
+  maxReplicas: 10 # Maximum number of Pod replicas 
+  
+  targetCPUUtilizationPercentage: 50 # Target CPU usage percentage
+                                    # to scale around

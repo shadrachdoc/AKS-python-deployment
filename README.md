@@ -70,6 +70,39 @@ curl http://IP address
 
 http://<IP address>
 
+# Deployment
+
+This application is currently deployed to Kubernetes using raw YAML manifests. 
+
+## Future Enhancements
+
+For easier management and deployment, we could incorporate a packaging tool like Kustomize or Helm.
+
+### Kustomize
+
+Kustomize lets you customize raw Kubernetes YAMLs for multiple environments like dev, test, prod by applying config overlays and partials. This keeps base manifests intact while letting teams tweak deployments.
+
+Some ways we could use Kustomize:
+
+- Set names, namespaces, replicas per environment
+- Add/modify resources like ingress, services, configs  
+- Parameterize full YAML blocks for customization
+
+
+### Helm
+
+Helm provides package management for Kubernetes using shareable charts. Charts encapsulate all YAML, config and scripts needed to install an application.
+
+Benefits of Helm:
+
+- No need to write raw YAML, reduce duplication
+- Package management capabilities like versioning and releasing
+- Handle complex deployments with ease
+- Share charts publicly or privately across teams
+
+
+Using Kustomize or Helm would simplify and standardize deployments to any environment. We could incorporate as the application grows more complex.
+
 ## Outputs
 
 ![AKS Dashboard](https://github.com/shadrachdoc/AKS-python-deployment/blob/main/screenshots/Azure-screenshot.png)
