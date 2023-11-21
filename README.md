@@ -58,17 +58,26 @@ Set the following GitHub variables:
    ```bash
    kubectl get svc
 
+## Console Output:
+
+![github action console output](https://github.com/shadrachdoc/AKS-python-deployment/blob/main/screenshots/console-output.png)
+
+## Browser output
+
+![Browser output](https://github.com/shadrachdoc/AKS-python-deployment/blob/main/screenshots/browser-output.png)
+browser-output.png
+
 ### Interacting with the Application
 
 Use the following commands to interact with the deployed application:
 
 ## In CLI
 
-curl http://IP address
+curl http://IP-address
 
 ## In Browser
 
-http://<IP address>
+http://IP-address
 
 # Deployment
 
