@@ -45,12 +45,11 @@ jobs:
         chmod +x snyk
         echo "$HOME/snyk" >> $GITHUB_PATH
         pwd
+        ls -ltr
 
     - name: Snyk Scan
       run: |
-        curl -sL https://github.com/snyk/snyk/releases/latest/download/snyk-linux -o snyk
-        chmod +x snyk
-        source ~/.bashrc  # Assuming bash is the default shell
+        cd /home/runner/work/AKS-python-deployment/AKS-python-deployment/
         snyk container test ${{ secrets.SECRET_USERNAME }}/py_flash:${{github.sha}}
 
     - name: Post Snyk Results
