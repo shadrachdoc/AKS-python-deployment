@@ -24,20 +24,20 @@ jobs:
         pip install -r py_flash/requirements.txt
 
     - name: Build Docker image
-      run: docker build -t py_flash:${{github.sha}} -f py_flash/Dockerfile .
+      run: docker build -t py-pipetest:${{github.sha}} -f py_flash/Dockerfile .
 
     - name: Log in to Docker Hub
       run: docker login -u ${{ secrets.SECRET_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
 
     - name: Tag Docker image
       run: |
-        docker tag py_flash:${{github.sha}} ${{ secrets.SECRET_USERNAME }}/py_flash:${{github.sha}}
-        docker tag py_flash:${{github.sha}} ${{ secrets.SECRET_USERNAME }}/py_flash:latest
+        docker tag py-pipetest:${{github.sha}} ${{ secrets.SECRET_USERNAME }}/py-pipetest:${{github.sha}}
+        docker tag py-pipetest:${{github.sha}} ${{ secrets.SECRET_USERNAME }}/py-pipetest:latest
 
     - name: Push Docker image
       run: |
-        docker push ${{ secrets.SECRET_USERNAME }}/py_flash:${{github.sha}}
-        docker push ${{ secrets.SECRET_USERNAME }}/py_flash:latest
+        docker push ${{ secrets.SECRET_USERNAME }}/py-pipetest:${{github.sha}}
+        docker push ${{ secrets.SECRET_USERNAME }}/py-pipetest:latest
     
     - name: Install Snyk CLI
       run: |
