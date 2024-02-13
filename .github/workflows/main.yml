@@ -48,10 +48,14 @@ jobs:
 
     - name: Snyk Scan
       run: |
+        curl -sL https://github.com/snyk/snyk/releases/latest/download/snyk-linux -o snyk
+        chmod +x snyk
         source ~/.bashrc  # Assuming bash is the default shell
         snyk container test ${{ secrets.SECRET_USERNAME }}/py_flash:${{github.sha}}
 
     - name: Post Snyk Results
       run: |
+        curl -sL https://github.com/snyk/snyk/releases/latest/download/snyk-linux -o snyk
+        chmod +x snyk
         export PATH=$PATH:$HOME/snyk
         snyk monitor ${{ secrets.SECRET_USERNAME }}/py_flash:${{github.sha}}
