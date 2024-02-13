@@ -49,8 +49,8 @@ jobs:
 
     - name: Snyk Scan
       run: |
-        cd /home/runner/work/AKS-python-deployment/AKS-python-deployment/
-        snyk container test ${{ secrets.SECRET_USERNAME }}/py_flash:${{github.sha}}
+        
+        ./home/runner/work/AKS-python-deployment/AKS-python-deployment/snyk container test ${{ secrets.SECRET_USERNAME }}/py_flash:${{github.sha}}
 
     - name: Post Snyk Results
       run: |
