@@ -41,13 +41,17 @@ jobs:
     
     - name: Install Snyk CLI
       run: |
-         curl -sL https://github.com/snyk/snyk/releases/latest/download/snyk-linux -o snyk
-         chmod +x snyk
-         echo "$HOME/snyk" >> $GITHUB_PATH
-         echo $PATH
-    
+        curl -sL https://github.com/snyk/snyk/releases/latest/download/snyk-linux -o snyk
+        chmod +x snyk
+        echo "$HOME/snyk" >> $GITHUB_PATH
+        echo $PATH
+
     - name: Snyk Scan
-      run: snyk container test ${{ secrets.SECRET_USERNAME }}/py_flash:${{github.sha}}
+      run: |
+        export PATH=$PATH:$HOME/snyk
+        snyk container test ${{ secrets.SECRET_USERNAME }}/py_flash:${{github.sha}}
 
     - name: Post Snyk Results
-      run: snyk monitor ${{ secrets.SECRET_USERNAME }}/py_flash:${{github.sha}}
+      run: |
+        export PATH=$PATH:$HOME/snyk
+        snyk monitor ${{ secrets.SECRET_USERNAME }}/py_flash:${{github.sha}}
