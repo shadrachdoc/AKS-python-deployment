@@ -46,7 +46,9 @@ jobs:
       run: |
         docker push ${{ secrets.SECRET_USERNAME }}/py_flash:${{github.sha}}
         docker push ${{ secrets.SECRET_USERNAME }}/py_flash:latest
-
+    - name: Install Snyk CLI
+      run: |
+         curl -sSL https://install.snyk.io/unix.sh | bash
     - name: Snyk Scan
       run: snyk container test ${{ secrets.SECRET_USERNAME }}/py_flash:${{github.sha}}
 
