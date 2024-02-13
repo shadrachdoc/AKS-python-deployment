@@ -47,6 +47,7 @@ jobs:
         export PATH=$PATH:$HOME/snyk
         pwd
         ls -ltr
+        cd /home/runner/work/AKS-python-deployment/AKS-python-deployment
         snyk container test ${{ secrets.SECRET_USERNAME }}/py_flash:${{github.sha}}
         snyk monitor ${{ secrets.SECRET_USERNAME }}/py_flash:${{github.sha}}
 
