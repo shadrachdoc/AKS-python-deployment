@@ -48,7 +48,7 @@ jobs:
 
     - name: Snyk Scan
       run: |
-        export PATH=$PATH:$HOME/snyk
+        source ~/.bashrc  # Assuming bash is the default shell
         snyk container test ${{ secrets.SECRET_USERNAME }}/py_flash:${{github.sha}}
 
     - name: Post Snyk Results
