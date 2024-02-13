@@ -43,7 +43,8 @@ jobs:
       run: |
          curl -sL https://github.com/snyk/snyk/releases/latest/download/snyk-linux -o snyk
          chmod +x snyk
-         mv /usr/local/bin/
+         echo "$HOME/snyk" >> $GITHUB_PATH
+         echo $PATH
     
     - name: Snyk Scan
       run: snyk container test ${{ secrets.SECRET_USERNAME }}/py_flash:${{github.sha}}
