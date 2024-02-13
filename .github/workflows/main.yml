@@ -18,6 +18,14 @@ jobs:
       with:
         python-version: 3.8
 
+    - name: Install Snyk CLI
+      run: |
+        curl -sSL https://install.snyk.io/unix.sh | bash
+      if: always()
+
+    - name: Authenticate with Snyk
+      run: snyk auth ${{ secrets.SNYK_API_TOKEN }}
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -27,7 +35,7 @@ jobs:
       run: docker build -t py_flash:${{github.sha}} -f py_flash/Dockerfile .
 
     - name: Log in to Docker Hub
-      run: docker login -u ${{ secrets.SECRET_USERNAME}} -p ${{ secrets.SECRET_PASS}}
+      run: docker login -u ${{ secrets.SECRET_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
 
     - name: Tag Docker image
       run: |
@@ -39,18 +47,8 @@ jobs:
         docker push ${{ secrets.SECRET_USERNAME }}/py_flash:${{github.sha}}
         docker push ${{ secrets.SECRET_USERNAME }}/py_flash:latest
 
-    - name: Scan for vulnerabilities
-      uses: crazy-max/ghaction-container-scan@v3
-      with:
-        image: '${{ secrets.SECRET_USERNAME }}/py_flash:${{github.sha}}'
-         
-    - name: Install Snyk CLI
-      run: |
-         curl -sSL https://install.snyk.io/unix.sh | bash
-         if: always()
-    - name: Authenticate with Snyk
-      run: snyk auth ${{ secrets.SNYK_API_TOKEN }}
     - name: Snyk Scan
       run: snyk container test ${{ secrets.SECRET_USERNAME }}/py_flash:${{github.sha}}
+
     - name: Post Snyk Results
-      run: snyk monitor ${{ secrets.SECRET_SNYK_USERNAME }}/py_flash:${{github.sha}}
+      run: snyk monitor ${{ secrets.SECRET_USERNAME }}/py_flash:${{github.sha}}
