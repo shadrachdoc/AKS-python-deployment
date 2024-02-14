@@ -17,7 +17,7 @@ USER app
 RUN sudo apk add --no-cache nodejs npm
 
 # Install Snyk
-RUN npm install -g snyk
+RUN npm install -g snyk || (echo "npm log:" && cat /home/app/.npm/_logs/*-debug.log && exit 1)
 
 # Copy requirements and install
 COPY ./py_flash /app
