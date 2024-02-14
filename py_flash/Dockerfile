@@ -5,6 +5,9 @@ FROM python:3.6-alpine
 RUN addgroup -S app && adduser -S app -G app
 USER app
 
+# Install Node.js
+RUN apk add --no-cache nodejs npm
+
 # Install Snyk
 RUN npm install -g snyk
 
