@@ -3,7 +3,6 @@ FROM python:3.6-alpine
 
 # Set non-root user
 RUN addgroup -S app && adduser -S app -G app
-RUN addgroup app wheel  # Add the app user to the wheel group
 
 # Install sudo
 RUN apk add --no-cache sudo
@@ -17,6 +16,7 @@ USER app
 RUN sudo apk add --no-cache nodejs npm
 
 # Install Snyk
+RUN npm config set prefix /home/app/.npm
 RUN npm install snyk -g
 
 # Copy requirements and install
