@@ -38,16 +38,12 @@ jobs:
       run: |
         docker push ${{ secrets.SECRET_USERNAME }}/py-pipetest:${{github.sha}}
         docker push ${{ secrets.SECRET_USERNAME }}/py-pipetest:latest
-        
-    - name: Install Snyk CLI
-      run: |
-        curl -sL https://github.com/snyk/snyk/releases/latest/download/snyk-linux -o snyk
-        chmod +x snyk
-        echo "$HOME/snyk" >> $GITHUB_PATH
-        export PATH=$PATH:$HOME/snyk
-        pwd
-        ls -ltr
-        cd /home/runner/work/AKS-python-deployment/AKS-python-deployment
-        snyk container test ${{ secrets.SECRET_USERNAME }}/py_flash:${{github.sha}}
-        snyk monitor ${{ secrets.SECRET_USERNAME }}/py_flash:${{github.sha}}
 
+    - name: Run Snyk to check for vulnerabilities
+      uses: snyk/actions/node@master
+      env:
+          SNYK_TOKEN: ${{ secrets.SNYK_API_TOKEN }}
+      with:
+          command: monitor
+        
+    
