@@ -3,10 +3,18 @@ FROM python:3.6-alpine
 
 # Set non-root user
 RUN addgroup -S app && adduser -S app -G app
+RUN addgroup app wheel  # Add the app user to the wheel group
+
+# Install sudo
+RUN apk add --no-cache sudo
+
+# Allow the app user to run commands as sudo without a password
+RUN echo "app ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/app
+
 USER app
 
 # Install Node.js
-RUN apk add --no-cache nodejs npm
+RUN sudo apk add --no-cache nodejs npm
 
 # Install Snyk
 RUN npm install -g snyk
