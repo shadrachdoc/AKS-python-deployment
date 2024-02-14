@@ -5,6 +5,9 @@ FROM python:3.6-alpine
 RUN addgroup -S app && adduser -S app -G app
 USER app
 
+# Install Snyk
+RUN npm install -g snyk
+
 # Copy requirements and install
 COPY ./py_flash /app
 WORKDIR /app
