@@ -1,5 +1,5 @@
 # Use slimmer python:3.6-alpine base image
-FROM python:3.6-alpine
+FROM python:3.13.0a4-alpine
 
 # Set non-root user
 RUN addgroup -S app && adduser -S app -G app
